@@ -6,23 +6,12 @@ library(httr)
 
 # Script parameters
 baseurl <- "https://pbs.puzzle.ch"
-usermail <- "hussein_kohlmann@hitobito.example.com"
-userpassword <- "hito42bito"
+token <- "d-Zx8kn-mKWaxXziYs62xVX2HdUdVKnSmLQYpQG-XznkbRD71g"
 groupid <- 1
 headers <- '{"Accept": "application/json"}'
-query <- list(	'person[email]'=usermail, 
-			'person[password]'=userpassword,
-			'headers'=headers
-)
-
-# Get user token
-response = POST(url = paste(baseurl, "/users/sign_in.json", sep=""), body = query)
-responseTxt <- content(response, "text")
-responseData <- fromJSON(responseTxt)
-tokenTxt <- responseData$people$authentication_token
 
 # Get MiData root group
-rootElement <- fromJSON(paste(baseurl,"/groups.json?user_email=", usermail, "&user_token=", tokenTxt, sep=""))
+rootElement <- fromJSON(paste(baseurl,"/groups/", groupid, ".json?token=", token, sep=""))
 # Filter cantons
 cantons = subset(rootElement$linked$groups, group_type == "Kantonalverband")
 rownames(cantons) <- seq(length=nrow(cantons))
