@@ -8,7 +8,6 @@ library(httr)
 baseurl <- "https://pbs.puzzle.ch"
 token <- "d-Zx8kn-mKWaxXziYs62xVX2HdUdVKnSmLQYpQG-XznkbRD71g"
 groupid <- 1
-headers <- '{"Accept": "application/json"}'
 
 # Get MiData root group
 rootElement <- fromJSON(paste(baseurl,"/groups/", groupid, ".json?token=", token, sep=""))
